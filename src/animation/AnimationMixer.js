@@ -618,19 +618,15 @@ class AnimationMixer extends EventDispatcher {
 
 		deltaTime *= this.timeScale;
 
-		const actions = this._actions,
-			nActions = this._nActiveActions,
-
-			time = this.time += deltaTime,
-			timeDirection = Math.sign( deltaTime ),
-
-			accuIndex = this._accuIndex ^= 1;
+		const time = this.time += deltaTime,
+			  timeDirection = Math.sign( deltaTime ),
+			  accuIndex = this._accuIndex ^= 1;
 
 		// run active actions
 
-		for ( let i = 0; i !== nActions; ++ i ) {
+		for ( let i = 0; i < this._actions.length; ++ i ) {
 
-			const action = actions[ i ];
+			const action = this._actions[ i ];
 
 			action._update( time, deltaTime, timeDirection, accuIndex );
 
